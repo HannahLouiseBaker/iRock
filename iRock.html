@@ -2,24 +2,61 @@
 <html>
   <head>
     <title>iRock</title>
+    <script type="text/JavaScript" src="cookies.js"></script>
     <script type="text/JavaScript">
-      function touchRock() {
-        var userName = prompt("What is your name?", "Enter your name here.");
+    function greetUser() {
+      if (navigator.cookieEnabled) {
+        userName = readCookie("irock_username");
+      }
+      if (userName) {
+          alert("Hello " + userName + ", it's great to see you again.");
+        } else {
+          alert("Hi, I am your pet rock!");
+        }
+    }
 
+    function touchRock() {
+      if (userName) {
+        alert("Thanks for visiting me, " + userName + ".");
+      } else {
+        userName = prompt("What is your name?", "Enter your name here.");
         if (userName) {
-          alert("It is good to meet you, " + userName + ".");
-          document.getElementById("rockImg").src = "rock_happy.png";
-          setTimeout("document.getElementById('rockImg').src = 'rock.png';", 5 * 60 * 1000);
+          alert("It's good to meet you, " + userName + ".");
+          if (navigator.cookieEnabled)
+            writeCookie("irock_username", userName, 5 * 365);
+          else
+          alert("Sorry, cookies aren't supported in your browser. I won't remember you later.");
         }
       }
+      document.getElementById("rockImg").src = "rock_happy.png";
+      setTimeout("document.getElementById('rockImg').src = 'rock.png';", 5 * 60 * 1000);
+    }
+    /*function touchRock() {
+      if (navigator.cookieEnabled) {
+        userName = readCookie("irock_username");
+        if (username) {
+          alert("Thanks for visiting me, " + userName);
+      }
+      } else {
+        let userName = prompt("What is your name?", "Enter your name here.");
+        if (userName) {
+          alert("It's good to meet you, " + userName + ".");
+          /*if (navigator.cookieEnabled)
+            writeCookie("irock_username", userName, 5 * 365);
+           else
+            alert("Sorry, cookies aren't supported in your browser. I won't remember you later.");
+
+        }
+      }
+      document.getElementById("rockImg").src = "rock_happy.png";
+      setTimeout("document.getElementById('rockImg').src = 'rock.png';", 5 * 60 * 1000);
+    }*/
 
       function resizeRock() {
         document.getElementById("rockImg").style.height = (document.body.clientHeight - 100) * 0.4;
       }
 
-      function greetUser() {
-        alert("Hi, I am your pet rock!");
-      }
+
 
     </script>
   </head>
