@@ -12,10 +12,19 @@
           setTimeout("document.getElementById('rockImg').src = 'rock.png';", 5 * 60 * 1000);
         }
       }
+
+      function resizeRock() {
+        document.getElementById("rockImg").style.height = (document.body.clientHeight - 100) * 0.4;
+      }
+
+      function greetUser() {
+        alert("Hi, I am your pet rock!");
+      }
+
     </script>
   </head>
 
-  <body onload="alert('Hi, I am your pet rock!');">
+  <body onload="greetUser(); resizeRock();" onresize="resizeRock();">
     <div style="margin-top:100px; text-align:center">
       <img id="rockImg" src="rock.png" alt="iRock" style="cursor:pointer" onclick="touchRock();"/>
     </div>
